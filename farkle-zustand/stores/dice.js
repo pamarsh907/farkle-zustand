@@ -46,3 +46,5 @@ const useDiceStore = create((set) => ({
 
 export const useDice = () => useDiceStore((state) => state.dice)
 export const useDiceActions = () => useDiceStore((state) => state.actions)
+
+export default useDiceStore
