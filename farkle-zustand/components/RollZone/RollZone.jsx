@@ -6,14 +6,15 @@ export default function RollZone() {
     width: '500px',
     height: '500px',
     border: 'solid',
-    backgroundColor: 'blue'
+    backgroundColor: 'blue',
+    position: 'relative'
   }
 
-  const selectedDice = useDice().filter(die => die.selected === false)
+  const dice = useDice().filter(die => die.onBoard === true)
 
   return (
     <div style={style}>
-      {selectedDice.map(die => <Die die={die}/>)}
+      {dice.map(die => <Die die={die} key={die.id}/>)}
     </div>
   )
 }

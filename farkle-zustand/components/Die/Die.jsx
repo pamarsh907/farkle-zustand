@@ -1,16 +1,20 @@
 import './Die.css'
-import { useDiceActions } from "../../stores/dice";
+import { useDiceActions } from "../../stores/dice"
+import { motion } from "motion/react"
 
 export default function Die({die}) {
   // const dieClass = 'die__' + value    
-  const { selectDie } = useDiceActions()
+  const { toggleHoldDie } = useDiceActions()
 
   const style = {
-    backgroundColor: die.selected ? 'red' : 'gray'
+    backgroundColor: die.held ? 'red' : 'gray',
+    position: die.onBoard ? 'absolute' : 'relative',
+    left: die.onBoard ? `${die.xLoc}px` : '0px',
+    top: die.onBoard ? `${die.yLoc}px` : '0px'
   }
 
   return <>
-    <button className='die' onClick={() => selectDie(die.id)} style={style}>
+    <motion.button className='die' onClick={() => toggleHoldDie(die.id)} style={style} layoutId={`die-${die.id}`}>
       {die.value == 1 &&     
         <div className='die__1'>
           <div className='die__dot'></div>
@@ -70,6 +74,6 @@ export default function Die({die}) {
           </div>
         </div>
       }
-    </button>
+    </motion.button>
   </>
 }
