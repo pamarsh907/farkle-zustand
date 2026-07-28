@@ -40,9 +40,6 @@ const useDiceStore = create((set, get) => ({
 
       return { dice }
     }),
-    //to make dice always go on end we need to
-    //if dice exists, remove it?
-    //else add it to end
     toggleHoldDie: (id) => set(state => {
       const dice = state.dice
       const reorderedArr = [

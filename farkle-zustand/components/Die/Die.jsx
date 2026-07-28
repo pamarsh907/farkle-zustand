@@ -1,5 +1,4 @@
 import './Die.css'
-import { useDiceActions } from "../../stores/dice"
 import { motion } from "motion/react"
 import { useGameActions } from '../../stores/game'
 import { useStatus } from '../../stores/game'
