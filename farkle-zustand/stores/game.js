@@ -1,7 +1,5 @@
 import { create } from 'zustand'
-import { useDice } from './dice'
 import useDiceStore from './dice'
-import { useDiceActions } from './dice'
 import { evaluateDice, evaluateDiceSet } from '../utils/scoreUtils'
 
 
@@ -125,13 +123,15 @@ const useGameStore = create((set, get) => ({
       }))
 
       //Update points for current turn
-      console.log('get().currentTurn.heldDice in game store :', get().currentTurn.heldDice)
       set(state => ({
         currentTurn: {
           ...state.currentTurn,
           points: evaluateDiceSet(state.currentTurn.heldDice)
         }
       }))
+
+      //Sort dice for placement in dice rack
+      useDiceStore.getState().actions.sortDice()
     },
 
     endTurn: () => {

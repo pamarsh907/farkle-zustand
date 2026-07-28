@@ -19,7 +19,7 @@ export default function DiceRack() {
   return (
     <>
     <div className='diceRack' style={style}>
-      {dice.map(d => <Die die={d} key={d.id}/>)}  
+      {dice.map(d => <div>{d.id}<Die die={d} key={d.id}/></div>)}  
     </div>
     </>
   )
