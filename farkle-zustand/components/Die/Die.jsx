@@ -2,20 +2,32 @@ import './Die.css'
 import { useDiceActions } from "../../stores/dice"
 import { motion } from "motion/react"
 import { useGameActions } from '../../stores/game'
+import { useStatus } from '../../stores/game'
 
 export default function Die({die}) {
   // const dieClass = 'die__' + value    
   const { holdDie } = useGameActions()
+  const status = useStatus()
+
+
 
   const style = {
-    backgroundColor: die.held ? 'red' : 'gray',
+    backgroundColor: die.locked ? 'gray' : 'aquamarine',
     position: die.onBoard ? 'absolute' : 'relative',
     left: die.onBoard ? `${die.xLoc}px` : '0px',
-    top: die.onBoard ? `${die.yLoc}px` : '0px'
+    top: die.onBoard ? `${die.yLoc}px` : '0px',
+    borderColor: die.locked ? 'red' : 'blue'
   }
 
+  const handleOnClick = (id) => {
+    if(status !== 'farkle'){
+      holdDie(id)
+    }
+  }
+  const disabled = status === 'farkle' || die.locked === true
+
   return <>
-    <motion.button className='die' onClick={() => holdDie(die.id)} style={style} layoutId={`die-${die.id}`}>
+    <motion.button disabled={disabled} className='die' onClick={() => handleOnClick(die.id)} style={style} layoutId={`die-${die.id}`}>
       {die.value == 1 &&     
         <div className='die__1'>
           <div className='die__dot'></div>

@@ -3,12 +3,12 @@ import { create } from 'zustand'
 //die status, make enume for onBoard, atHome, held
 const useDiceStore = create((set) => ({
   dice: [
-    { id: 1, value: 1, onBoard: false, held: false, xLoc: 0, yLoc: 0 },
-    { id: 2, value: 1, onBoard: false, held: false, xLoc: 0, yLoc: 0 },
-    { id: 3, value: 1, onBoard: false, held: false, xLoc: 0, yLoc: 0 },
-    { id: 4, value: 1, onBoard: false, held: false, xLoc: 0, yLoc: 0 },
-    { id: 5, value: 1, onBoard: false, held: false, xLoc: 0, yLoc: 0 },
-    { id: 6, value: 1, onBoard: false, held: false, xLoc: 0, yLoc: 0 }
+    { id: 1, value: 1, onBoard: false, held: false, locked: true, xLoc: 0, yLoc: 0 },
+    { id: 2, value: 1, onBoard: false, held: false, locked: true, xLoc: 0, yLoc: 0 },
+    { id: 3, value: 1, onBoard: false, held: false, locked: true, xLoc: 0, yLoc: 0 },
+    { id: 4, value: 1, onBoard: false, held: false, locked: true, xLoc: 0, yLoc: 0 },
+    { id: 5, value: 1, onBoard: false, held: false, locked: true, xLoc: 0, yLoc: 0 },
+    { id: 6, value: 1, onBoard: false, held: false, locked: true, xLoc: 0, yLoc: 0 }
   ],
   actions: {
     rollDice: () => set(
@@ -18,7 +18,8 @@ const useDiceStore = create((set) => ({
           value: Math.floor(Math.random() * 6) + 1,
           onBoard: true,
           xLoc: Math.floor(Math.random() * 200),
-          yLoc: Math.floor(Math.random() * 200)
+          yLoc: Math.floor(Math.random() * 200),
+          locked: false
         }) : die)
       })
     ),
@@ -40,6 +41,25 @@ const useDiceStore = create((set) => ({
           yLoc: Math.floor(Math.random() * 500)
         }) : die)
       })
+    ),
+    lockDie: (id) => set(
+      state => ({
+        dice: state.dice.map((die) => die.id === id ? ({
+          ...die,
+          locked: true
+        }) : die)
+      })
+    ),
+    resetDice: () => set({
+        dice: [
+          { id: 1, value: 1, onBoard: false, held: false, locked: true, xLoc: 0, yLoc: 0 },
+          { id: 2, value: 1, onBoard: false, held: false, locked: true, xLoc: 0, yLoc: 0 },
+          { id: 3, value: 1, onBoard: false, held: false, locked: true, xLoc: 0, yLoc: 0 },
+          { id: 4, value: 1, onBoard: false, held: false, locked: true, xLoc: 0, yLoc: 0 },
+          { id: 5, value: 1, onBoard: false, held: false, locked: true, xLoc: 0, yLoc: 0 },
+          { id: 6, value: 1, onBoard: false, held: false, locked: true, xLoc: 0, yLoc: 0 }
+        ]
+      }
     )
   }
 }))

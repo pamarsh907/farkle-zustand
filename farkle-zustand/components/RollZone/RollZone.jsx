@@ -7,7 +7,9 @@ export default function RollZone() {
     height: '500px',
     border: 'solid',
     backgroundColor: 'blue',
-    position: 'relative'
+    position: 'relative',
+    padding: '3px',
+    margin: '3px'
   }
 
   const dice = useDice().filter(die => die.onBoard === true)

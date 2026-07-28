@@ -1,7 +1,6 @@
 
 function getCounts(dice) {
   return dice.reduce((counts, die) => {
-    console.log('die :', die)
     counts[die - 1]++
     return counts
   }, [0, 0, 0, 0, 0, 0])
@@ -16,9 +15,8 @@ function getLeftoverDice(counts) {
 }
 
 function evaluateDice(diceArr) {
-  const diceValueArr = diceArr.map(die => die.value)
   let points = 0
-  let dicePerNum = getCounts(diceValueArr)
+  let dicePerNum = getCounts(diceArr)
   //if nested twice (total points) then flatten the array once
   while (true) {
     //algorighm
@@ -123,13 +121,27 @@ function evaluateDice(diceArr) {
       points += 50
       removeDice(dicePerNum, 5, 1)
     } else {
-      console.log("invalid selection")
+      //console.log("invalid selection")
       break
     }
   }
   const leftOverDice = getLeftoverDice(dicePerNum)
   const scoringDice = diceArr.length - leftOverDice
+  console.log('points inside evalDice :', points)
   return { points, leftOverDice, scoringDice }
 }
 
-export { evaluateDice }
+function evaluateDiceSet(diceSet) {
+  console.log('diceSet in function :', diceSet)
+  let total = 0
+  diceSet.forEach(set => {
+    console.log('set in evalDiceSet :', set)
+    const result = evaluateDice(set)
+    console.log('result in evalDiceSet :', result)
+    total += result.points
+  })
+  console.log('total from evalDiceSet :', total)
+  return total
+}
+
+export { evaluateDice, evaluateDiceSet }
