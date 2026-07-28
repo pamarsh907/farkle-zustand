@@ -8,20 +8,20 @@ const getRandomXY = (min, max) => {
     return [getRandomNumber(min, max), getRandomNumber(min, max)]
 }
 
-export const getUniqueRandomXY = (min, max, otherRandoms, maxCloseness) => {
-    let random = getRandomXY(min, max)
-    let isOverlapping = true
-    while(isOverlapping){
-        let didOneOverlap = false
-        for (const other of otherRandoms) {
-            if((random[0] >= other[0] - maxCloseness && random[0] <= other[0] + maxCloseness) && 
-                (random[1] >= other[1] - maxCloseness && random[1] <= other[1] + maxCloseness)) {
-                random = getRandomXY(min, max)
-                didOneOverlap = true
-                break
-            }
-        }
-        isOverlapping = didOneOverlap
+export const getUniqueRandomXY = (min, max, existing, minDistance) => {
+  for (let attempts = 0; attempts < 100; attempts++) {
+    const point = getRandomXY(min, max)
+
+    const overlaps = existing.some(([x, y]) => {
+      const dx = point[0] - x
+      const dy = point[1] - y
+
+      return dx * dx + dy * dy < minDistance * minDistance;
+    });
+
+    if (!overlaps) {
+      return point;
     }
-    return random
+  }
+  return getRandomXY(min, max)
 }
