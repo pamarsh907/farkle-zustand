@@ -1,4 +1,3 @@
-import Die from "../Die/Die";
 import { useDice } from "../../stores/dice"
 import { useCurrentGrouping } from "../../stores/dice"
 import DiceGroup from "../DiceGroup/DiceGroup";
@@ -10,8 +9,9 @@ export default function DiceRack() {
 
   const style = {
     display: 'flex',
-    height: '50px',
+    height: '100px',
     justifyContent: 'center',
+    alignItems: 'center',
     gap: '5px',
     marginLeft: 'auto',
     marginRight: 'auto'

@@ -20,10 +20,10 @@ const useGameStore = create((set, get) => ({
     roll: () => {
       //get dice from dice store
       const dice = useDiceStore.getState().dice
-      
+
       //filter for held dice  
       const heldDice = dice.filter(die => die.held === true)
-      
+
       //if there are any held dice then toggle lock flag
       heldDice.forEach((heldDie) => {
         useDiceStore.getState().actions.lockDie(heldDie.id)
@@ -44,7 +44,7 @@ const useGameStore = create((set, get) => ({
       const state = get()
       if (state.status === 'valid' || state.status === 'preroll') {
         //if all dice are held then reset all dice
-        if(useDiceStore.getState().dice.filter(die => die.held).length === 6) {
+        if (useDiceStore.getState().dice.filter(die => die.held).length === 6) {
           console.log('HOT DICE!')
           useDiceStore.getState().actions.resetDice()
         }
@@ -94,33 +94,40 @@ const useGameStore = create((set, get) => ({
       //Get held dice for current roll (excludes locked dice)
       const heldDice = useDiceStore.getState().dice.filter(die => die.held === true && die.locked === false)
 
-      //Get held dice values
-      const diceValues = heldDice.map(die => die.value)
+      //If there are held dice then evaluate and set status
+      if (heldDice.length > 0) {
+        //Get held dice values
+        const diceValues = heldDice.map(die => die.value)
 
-      //Evaluate held dice
-      const result = evaluateDice(diceValues)
-      if (result.scoringDice < heldDice.length) {
-        set({ status: 'invalid' })
+        //Evaluate held dice
+        const result = evaluateDice(diceValues)
+        if (result.scoringDice < heldDice.length) {
+          set({ status: 'invalid' })
+        } else {
+          set({ status: 'valid' })
+        }
+
+        //Get number of selections in current turn
+        const heldDiceSetCount = get().currentTurn.heldDice.length
+
+        //Add held dice to last element in current turn's held dice
+        set(state => ({
+          currentTurn: {
+            ...state.currentTurn,
+            heldDice: state.currentTurn.heldDice.map((set, index) => {
+              if (index === heldDiceSetCount - 1) {
+                return diceValues
+              } else {
+                return set
+              }
+            })
+          }
+        }))
+        //If zero held dice then skip evaluation, set to invalid
       } else {
-        set({ status: 'valid' })
+        set({ status: 'invalid' })
       }
 
-      //Get number of selections in current turn
-      const heldDiceSetCount = get().currentTurn.heldDice.length
-
-      //Add held dice to last element in current turn's held dice
-      set(state => ({
-        currentTurn: {
-          ...state.currentTurn,
-          heldDice: state.currentTurn.heldDice.map((set, index) => {
-            if (index === heldDiceSetCount - 1) {
-              return diceValues
-            } else {
-              return set
-            }
-          })
-        }
-      }))
 
       //Update points for current turn
       set(state => ({
@@ -161,7 +168,7 @@ const useGameStore = create((set, get) => ({
       useDiceStore.getState().actions.resetDice()
 
       //check for victory
-      if(get().totalPoints >= 10000){
+      if (get().totalPoints >= 10000) {
         set({
           status: 'You win'
         })

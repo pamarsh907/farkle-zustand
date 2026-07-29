@@ -12,10 +12,9 @@ import Divider from '@mui/material/Divider'
 
 function App() {
   const gameContainerStyle = {
-    width: '80%',
-    height: '50%',
-    marginLeft: 'auto',
-    marginRight: 'auto'
+    width: '100%',
+    height: '100%',
+    backgroundColor: 'gray'
   }
 
   const totalPoints = useTotalPoints()

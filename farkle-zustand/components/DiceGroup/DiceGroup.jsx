@@ -3,29 +3,29 @@ import { motion } from "motion/react"
 import { AnimatePresence } from "motion/react"
 
 export default function DiceGroup({ dice }) {
-  const groupColors = [
-    'red',
-    'orange',
-    'yellow',
-    'green',
-    'blue',
-    'indigo'
-  ]
+  // const groupColors = [
+  //   'red',
+  //   'orange',
+  //   'yellow',
+  //   'green',
+  //   'blue',
+  //   'indigo'
+  // ]
 
   const grouping = dice[0].grouping
-  const color = groupColors[grouping]
+  // const color = groupColors[grouping]
 
  const ring  = {
   position: 'absolute',
-  inset: '-5px',
+  inset: '0px',
   border: '2px solid',
   borderRadius: '18px',
   pointerEvents: 'none',
-  borderColor: {color}
+  borderColor: 'gray',
 }
 
   return (
-    <div className='group' style={{position: 'relative'}}>
+    <div style={{position: 'relative', padding: '15px'}}>
       <AnimatePresence>
         {grouping !== 0 && (
           <motion.div

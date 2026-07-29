@@ -11,11 +11,10 @@ export default function Die({die}) {
 
 
   const style = {
-    backgroundColor: die.locked ? 'gray' : 'aquamarine',
+    backgroundColor: die.locked ? 'gray' : 'white',
     position: die.onBoard ? 'absolute' : 'relative',
     left: die.onBoard ? `${die.xLoc}px` : '0px',
-    top: die.onBoard ? `${die.yLoc}px` : '0px',
-    borderColor: die.locked ? 'red' : 'blue'
+    top: die.onBoard ? `${die.yLoc}px` : '0px'
   }
 
   const handleOnClick = (id) => {

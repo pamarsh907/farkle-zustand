@@ -1,6 +1,5 @@
 import { useDice } from "../../stores/dice"
 import Die from "../Die/Die"
-import Card from "@mui/material/Card"
 
 export default function RollZone() {
   const style = {

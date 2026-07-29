@@ -1,15 +1,14 @@
 import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import Box from '@mui/material/Box';
-import Paper from '@mui/material/Paper';
 import Container from '@mui/material/Container';
 
-
 export default function GameBoard(props) {
+  const style = {
+    border: 'solid 5px'
+  }
+
   return (
     <Container maxWidth='sm'>
-      GameBoard
-      <Card>
+      <Card style={style}>
         {props.children}
       </Card>
     </Container>
