@@ -1,15 +1,11 @@
 import { useDice } from "../../stores/dice"
 import Die from "../Die/Die"
+import Card from "@mui/material/Card"
 
 export default function RollZone() {
   const style = {
-    width: '500px',
     height: '500px',
-    border: 'solid',
-    backgroundColor: 'blue',
     position: 'relative',
-    padding: '3px',
-    margin: '3px'
   }
 
   const dice = useDice().filter(die => die.onBoard === true)

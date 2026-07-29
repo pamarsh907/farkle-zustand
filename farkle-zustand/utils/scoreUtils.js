@@ -127,20 +127,15 @@ function evaluateDice(diceArr) {
   }
   const leftOverDice = getLeftoverDice(dicePerNum)
   const scoringDice = diceArr.length - leftOverDice
-  console.log('points inside evalDice :', points)
   return { points, leftOverDice, scoringDice }
 }
 
 function evaluateDiceSet(diceSet) {
-  console.log('diceSet in function :', diceSet)
   let total = 0
   diceSet.forEach(set => {
-    console.log('set in evalDiceSet :', set)
     const result = evaluateDice(set)
-    console.log('result in evalDiceSet :', result)
     total += result.points
   })
-  console.log('total from evalDiceSet :', total)
   return total
 }
 

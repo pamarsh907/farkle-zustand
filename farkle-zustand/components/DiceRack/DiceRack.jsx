@@ -1,26 +1,45 @@
 import Die from "../Die/Die";
 import { useDice } from "../../stores/dice"
+import { useCurrentGrouping } from "../../stores/dice"
+import DiceGroup from "../DiceGroup/DiceGroup";
 
 export default function DiceRack() {
+  const groupCount = useCurrentGrouping()
   const dice = useDice().filter(die => die.onBoard === false)
+  console.log('dice :', dice)
 
   const style = {
     display: 'flex',
-    width: '500px',
     height: '50px',
-    justifyContent: 'space-around',
-    gap: '12px',
-    borderStyle: 'solid',
-    borderWidth: '2px',
-    padding: '3px',
-    margin: '3px'
+    justifyContent: 'center',
+    gap: '5px',
+    marginLeft: 'auto',
+    marginRight: 'auto'
   }
+
+  let diceToDisplay = []
+  for (let i = 0; i <= groupCount; i++) {
+    //Get dice of a group
+    let filteredDice = dice.filter(die => die.grouping === i)
+
+    //If no dice in that group then skip
+    if (filteredDice.length > 0) {
+
+      //Sort dice of group by val
+      const sortedDice = filteredDice.sort((a, b) => a.value - b.value)
+
+      //Add each die to diceToDisplay
+      diceToDisplay = [...diceToDisplay, sortedDice]
+    }
+  }
+  //map diceToDisplay into Die components
+  const mappedDiceGroups = diceToDisplay.map(dice => <DiceGroup dice={dice} key={dice[0].grouping}/>)
 
   return (
     <>
-    <div className='diceRack' style={style}>
-      {dice.map(d => <div>{d.id}<Die die={d} key={d.id}/></div>)}  
-    </div>
+      <div className='diceRack' style={style}>
+        {mappedDiceGroups}
+      </div>
     </>
   )
 }

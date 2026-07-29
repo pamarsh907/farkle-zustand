@@ -1,23 +1,27 @@
 import { create } from 'zustand'
 import { getUniqueRandomXY } from '../utils/diceUtils'
 
+const defaultDice = [
+  { id: 1, value: 1, onBoard: false, held: false, locked: true, grouping: 0, xLoc: 0, yLoc: 0 },
+  { id: 2, value: 1, onBoard: false, held: false, locked: true, grouping: 0, xLoc: 0, yLoc: 0 },
+  { id: 3, value: 1, onBoard: false, held: false, locked: true, grouping: 0, xLoc: 0, yLoc: 0 },
+  { id: 4, value: 1, onBoard: false, held: false, locked: true, grouping: 0, xLoc: 0, yLoc: 0 },
+  { id: 5, value: 1, onBoard: false, held: false, locked: true, grouping: 0, xLoc: 0, yLoc: 0 },
+  { id: 6, value: 1, onBoard: false, held: false, locked: true, grouping: 0, xLoc: 0, yLoc: 0 }
+]
+
 //die status, make enume for onBoard, atHome, held
 const useDiceStore = create((set, get) => ({
-  dice: [
-    { id: 1, value: 1, onBoard: false, held: false, locked: true, xLoc: 0, yLoc: 0 },
-    { id: 2, value: 1, onBoard: false, held: false, locked: true, xLoc: 0, yLoc: 0 },
-    { id: 3, value: 1, onBoard: false, held: false, locked: true, xLoc: 0, yLoc: 0 },
-    { id: 4, value: 1, onBoard: false, held: false, locked: true, xLoc: 0, yLoc: 0 },
-    { id: 5, value: 1, onBoard: false, held: false, locked: true, xLoc: 0, yLoc: 0 },
-    { id: 6, value: 1, onBoard: false, held: false, locked: true, xLoc: 0, yLoc: 0 }
-  ],
+  dice: defaultDice,
+  currentGrouping: 0,
   actions: {
     rollDice: () => set(state => {
+      const newGrouping = state.currentGrouping + 1
       const usedPositions = []
 
       const dice = state.dice.map((die) => {
         const [x, y] = getUniqueRandomXY(
-          0,
+          50,
           450,
           usedPositions,
           50
@@ -38,7 +42,10 @@ const useDiceStore = create((set, get) => ({
         }
       })
 
-      return { dice }
+      return {
+        dice: dice,
+        currentGrouping: newGrouping
+      }
     }),
     toggleHoldDie: (id) => set(state => {
       const dice = state.dice
@@ -51,7 +58,8 @@ const useDiceStore = create((set, get) => ({
         dice: reorderedArr.map((die) => die.id === id ? ({
           ...die,
           held: !die.held,
-          onBoard: !die.onBoard
+          onBoard: !die.onBoard,
+          grouping: die.held ? 0 : state.currentGrouping
         }) : die)
       }
     }
@@ -75,14 +83,8 @@ const useDiceStore = create((set, get) => ({
       })
     ),
     resetDice: () => set({
-      dice: [
-        { id: 1, value: 1, onBoard: false, held: false, locked: true, xLoc: 0, yLoc: 0 },
-        { id: 2, value: 1, onBoard: false, held: false, locked: true, xLoc: 0, yLoc: 0 },
-        { id: 3, value: 1, onBoard: false, held: false, locked: true, xLoc: 0, yLoc: 0 },
-        { id: 4, value: 1, onBoard: false, held: false, locked: true, xLoc: 0, yLoc: 0 },
-        { id: 5, value: 1, onBoard: false, held: false, locked: true, xLoc: 0, yLoc: 0 },
-        { id: 6, value: 1, onBoard: false, held: false, locked: true, xLoc: 0, yLoc: 0 }
-      ]
+      dice: defaultDice,
+      currentGrouping: 0
     }),
     sortDice: () => {
       const dice = get().dice
@@ -96,6 +98,7 @@ const useDiceStore = create((set, get) => ({
 }))
 
 export const useDice = () => useDiceStore((state) => state.dice)
+export const useCurrentGrouping = () => useDiceStore((state) => state.currentGrouping)
 export const useDiceActions = () => useDiceStore((state) => state.actions)
 
 export default useDiceStore
