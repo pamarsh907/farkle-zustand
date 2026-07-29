@@ -1,14 +1,12 @@
-//import { useState } from 'react'
 import DiceRack from "../components/DiceRack/DiceRack"
 import RollZone from "../components/RollZone/RollZone"
 import Controls from "../components/Controls/Controls"
-import { useStatus } from "../stores/game"
-import { useTotalPoints } from "../stores/game"
-import { useCurrentTurn } from "../stores/game"
+import FarkleNotification from "../components/FarkleNotification/FarkleNotification"
 import { LayoutGroup } from "motion/react"
 import GameBoard from "../components/GameBoard/GameBoard"
 import Divider from '@mui/material/Divider'
-
+import ScoreBoard from "../components/Scoreboard/Scoreboard"
+import { useStatus } from "../stores/game"
 
 function App() {
   const gameContainerStyle = {
@@ -17,27 +15,24 @@ function App() {
     backgroundColor: 'gray'
   }
 
-  const totalPoints = useTotalPoints()
   const status = useStatus()
-  const currentTurn = useCurrentTurn()
-  console.log('currentTurn :', currentTurn)
+
   return (
     <>
       <div style={gameContainerStyle}>
         <GameBoard>
-          <h1>{status}</h1>
-          <h2>{`Total Points: ${totalPoints}`}</h2>
-          <h2>{`Turn Points: ${currentTurn.points}`}</h2>
-          <Divider/>
+          <ScoreBoard />
+          <Divider />
           <LayoutGroup>
+            <FarkleNotification status={status}/>
             <RollZone />
-            <Divider/>
+            <Divider />
             <DiceRack />
           </LayoutGroup>
-          <Divider/>
+          <Divider />
           <Controls />
         </GameBoard>
-      </div>
+      </div >
     </>
   )
 }
