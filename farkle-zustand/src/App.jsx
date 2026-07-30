@@ -7,6 +7,7 @@ import GameBoard from "../components/GameBoard/GameBoard"
 import Divider from '@mui/material/Divider'
 import ScoreBoard from "../components/Scoreboard/Scoreboard"
 import { useStatus } from "../stores/game"
+import WinNotification from "../components/WinNotification/WinNotification"
 
 function App() {
   const gameContainerStyle = {
@@ -25,6 +26,7 @@ function App() {
           <Divider />
           <LayoutGroup>
             <FarkleNotification status={status}/>
+            <WinNotification status={status}/>
             <RollZone />
             <Divider />
             <DiceRack />

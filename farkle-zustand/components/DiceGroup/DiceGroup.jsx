@@ -39,7 +39,7 @@ export default function DiceGroup({ dice }) {
         )}
       </AnimatePresence>
       <div style={{display: 'flex'}}>
-        {dice.map(die => <Die die={die} key={die.id} />)}
+        {dice.map(die => <Die die={die} key={`group-${die.id}`}/>)}
       </div>
 
 

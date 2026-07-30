@@ -11,7 +11,7 @@ export default function RollZone() {
 
   return (
     <div style={style}>
-      {dice.map(die => <Die die={die} key={die.id}/>)}
+      {dice.map(die => <Die die={die} key={`roll-${die.id}`}/>)}
     </div>
   )
 }

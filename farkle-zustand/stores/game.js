@@ -170,16 +170,29 @@ const useGameStore = create((set, get) => ({
       //check for victory
       if (get().totalPoints >= 10000) {
         set({
-          status: 'You win'
+          status: 'win'
         })
       } else {
         set({
           status: 'preroll'
         })
       }
+    },
+    resetGame: () => {
+      set({
+        turns: [],
+        currentTurn: {
+          rolls: [],
+          heldDice: [],
+          points: 0,
+          farkled: false
+        },
+        totalPoints: 0,
+        status: 'preroll'
+      })
     }
   }
-}))
+  }))
 
 export const useTurns = () => useGameStore((state) => state.turns)
 export const useCurrentTurn = () => useGameStore((state) => state.currentTurn)

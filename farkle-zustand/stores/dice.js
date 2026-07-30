@@ -2,12 +2,12 @@ import { create } from 'zustand'
 import { getUniqueRandomXY } from '../utils/diceUtils'
 
 const defaultDice = [
-  { id: 1, value: 1, onBoard: false, held: false, locked: true, grouping: 0, xLoc: 0, yLoc: 0 },
-  { id: 2, value: 1, onBoard: false, held: false, locked: true, grouping: 0, xLoc: 0, yLoc: 0 },
-  { id: 3, value: 1, onBoard: false, held: false, locked: true, grouping: 0, xLoc: 0, yLoc: 0 },
-  { id: 4, value: 1, onBoard: false, held: false, locked: true, grouping: 0, xLoc: 0, yLoc: 0 },
-  { id: 5, value: 1, onBoard: false, held: false, locked: true, grouping: 0, xLoc: 0, yLoc: 0 },
-  { id: 6, value: 1, onBoard: false, held: false, locked: true, grouping: 0, xLoc: 0, yLoc: 0 }
+  { id: 1, value: 1, onBoard: false, held: false, locked: true, grouping: 0, xLoc: 0, yLoc: 0, rollCount: 0, lastAnimatedRoll: 0, rotation: 0 },
+  { id: 2, value: 1, onBoard: false, held: false, locked: true, grouping: 0, xLoc: 0, yLoc: 0, rollCount: 0, lastAnimatedRoll: 0, rotation: 0 },
+  { id: 3, value: 1, onBoard: false, held: false, locked: true, grouping: 0, xLoc: 0, yLoc: 0, rollCount: 0, lastAnimatedRoll: 0, rotation: 0 },
+  { id: 4, value: 1, onBoard: false, held: false, locked: true, grouping: 0, xLoc: 0, yLoc: 0, rollCount: 0, lastAnimatedRoll: 0, rotation: 0 },
+  { id: 5, value: 1, onBoard: false, held: false, locked: true, grouping: 0, xLoc: 0, yLoc: 0, rollCount: 0, lastAnimatedRoll: 0, rotation: 0 },
+  { id: 6, value: 1, onBoard: false, held: false, locked: true, grouping: 0, xLoc: 0, yLoc: 0, rollCount: 0, lastAnimatedRoll: 0, rotation: 0 }
 ]
 
 //die status, make enume for onBoard, atHome, held
@@ -35,7 +35,8 @@ const useDiceStore = create((set, get) => ({
             onBoard: true,
             xLoc: x,
             yLoc: y,
-            locked: false
+            locked: false,
+            rollCount: die.rollCount + 1
           }
         } else {
           return die
@@ -64,16 +65,6 @@ const useDiceStore = create((set, get) => ({
       }
     }
     ),
-    rollDie: (id) => set(
-      state => ({
-        dice: state.dice.map((die) => die.id === id ? ({
-          ...die,
-          value: Math.floor(Math.random() * 6) + 1,
-          xLoc: Math.floor(Math.random() * 500),
-          yLoc: Math.floor(Math.random() * 500)
-        }) : die)
-      })
-    ),
     lockDie: (id) => set(
       state => ({
         dice: state.dice.map((die) => die.id === id ? ({
@@ -93,7 +84,23 @@ const useDiceStore = create((set, get) => ({
       set({
         dice: sortedDice
       })
-    }
+    },
+    incrementLastAnimatedRoll: (id) => set(
+      state => ({
+        dice: state.dice.map((die) => die.id === id ? ({
+          ...die,
+          lastAnimatedRoll: die.lastAnimatedRoll + 1
+        }) : die)
+      })
+    ),
+    setRotation: (id, rotation) => set(
+      state => ({
+        dice: state.dice.map((die) => die.id === id ? ({
+          ...die,
+          rotation: rotation
+        }) : die)
+      })
+    )
   }
 }))
 
