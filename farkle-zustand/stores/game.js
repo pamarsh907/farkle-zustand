@@ -2,7 +2,6 @@ import { create } from 'zustand'
 import useDiceStore from './dice'
 import { evaluateDice, evaluateDiceSet } from '../utils/scoreUtils'
 
-
 const useGameStore = create((set, get) => ({
   turns: [],
   currentTurn: {
@@ -127,7 +126,6 @@ const useGameStore = create((set, get) => ({
       } else {
         set({ status: 'invalid' })
       }
-
 
       //Update points for current turn
       set(state => ({

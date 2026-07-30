@@ -121,7 +121,7 @@ function evaluateDice(diceArr) {
       points += 50
       removeDice(dicePerNum, 5, 1)
     } else {
-      //console.log("invalid selection")
+      //all dice evaulated
       break
     }
   }
@@ -136,6 +136,9 @@ function evaluateDiceSet(diceSet) {
     const result = evaluateDice(set)
     total += result.points
   })
+
+  //TODO: make this return total points, but also
+  //and object containing each set and the points of that set/combo name
   return total
 }
 

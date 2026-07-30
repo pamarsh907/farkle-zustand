@@ -51,6 +51,11 @@ export default function Die({ die }) {
     }
   }, [die.onBoard, die.rotation, controls])
 
+  const hoverAnimation = !die.locked ? {
+    scale: 1.1,
+    transition: { duration: 0.1 }
+  } : {}
+
   return <>
     <motion.button
       disabled={disabled}
@@ -59,6 +64,7 @@ export default function Die({ die }) {
       style={style}
       layoutId={`die-${die.id}`}
       animate={controls}
+      whileHover={hoverAnimation}
     >
       {die.value == 1 &&
         <div className='die__1'>

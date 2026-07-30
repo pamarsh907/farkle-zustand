@@ -3,17 +3,7 @@ import { motion } from "motion/react"
 import { AnimatePresence } from "motion/react"
 
 export default function DiceGroup({ dice }) {
-  // const groupColors = [
-  //   'red',
-  //   'orange',
-  //   'yellow',
-  //   'green',
-  //   'blue',
-  //   'indigo'
-  // ]
-
   const grouping = dice[0].grouping
-  // const color = groupColors[grouping]
 
  const ring  = {
   position: 'absolute',
@@ -41,8 +31,6 @@ export default function DiceGroup({ dice }) {
       <div style={{display: 'flex'}}>
         {dice.map(die => <Die die={die} key={`group-${die.id}`}/>)}
       </div>
-
-
     </div>
   )
 }

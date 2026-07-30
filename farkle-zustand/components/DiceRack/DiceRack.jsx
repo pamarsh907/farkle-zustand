@@ -5,7 +5,6 @@ import DiceGroup from "../DiceGroup/DiceGroup";
 export default function DiceRack() {
   const groupCount = useCurrentGrouping()
   const dice = useDice().filter(die => die.onBoard === false)
-  console.log('dice :', dice)
 
   const style = {
     display: 'flex',
