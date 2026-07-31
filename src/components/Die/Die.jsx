@@ -51,7 +51,7 @@ export default function Die({ die }) {
     }
   }, [die.onBoard, die.rotation, controls])
 
-  const hoverAnimation = !die.locked ? {
+  const hoverAnimation = !die.locked && status !== 'farkle' ? {
     scale: 1.1,
     transition: { duration: 0.1 }
   } : {}

@@ -1,15 +1,15 @@
-import DiceRack from "../components/DiceRack/DiceRack"
-import RollZone from "../components/RollZone/RollZone"
-import Controls from "../components/Controls/Controls"
-import FarkleNotification from "../components/FarkleNotification/FarkleNotification"
+import DiceRack from "../DiceRack/DiceRack"
+import RollZone from "../RollZone/RollZone"
+import Controls from "../Controls/Controls"
+import FarkleNotification from "../FarkleNotification/FarkleNotification"
 import { LayoutGroup } from "motion/react"
-import GameBoard from "../components/GameBoard/GameBoard"
+import GameBoard from "../GameBoard/GameBoard"
 import Divider from '@mui/material/Divider'
-import ScoreBoard from "../components/Scoreboard/Scoreboard"
-import { useStatus } from "../stores/game"
-import WinNotification from "../components/WinNotification/WinNotification"
+import ScoreBoard from "../Scoreboard/Scoreboard"
+import { useStatus } from "../../stores/game"
+import WinNotification from "../WinNotification/WinNotification"
 
-function App() {
+function FarkleGame() {
   const gameContainerStyle = {
     width: '100%',
     height: '100%',
@@ -39,4 +39,4 @@ function App() {
   )
 }
 
-export default App
+export default FarkleGame
