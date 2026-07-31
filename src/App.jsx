@@ -1,40 +1,30 @@
-import DiceRack from "./components/DiceRack/DiceRack"
-import RollZone from "./components/RollZone/RollZone"
-import Controls from "./components/Controls/Controls"
-import FarkleNotification from "./components/FarkleNotification/FarkleNotification"
-import { LayoutGroup } from "motion/react"
-import GameBoard from "./components/GameBoard/GameBoard"
-import Divider from '@mui/material/Divider'
-import ScoreBoard from "./components/Scoreboard/Scoreboard"
-import { useStatus } from "./stores/game"
-import WinNotification from "./components/WinNotification/WinNotification"
+import { Routes, Route } from "react-router-dom"
+import HomePage from "./pages/HomePage"
+import LoginPage from "./pages/LoginPage"
+import FarkleGamePage from "./pages/FarkleGamePage"
+import { useEffect } from 'react'
+import { useUserActions } from "./stores/user"
+import farkleServcie from "./services/farkle"
 
 function App() {
-  const gameContainerStyle = {
-    width: '100%',
-    height: '100%',
-    backgroundColor: 'gray'
-  }
+  const { setUser } = useUserActions()
 
-  const status = useStatus()
+  useEffect(() => {
+    const loggedUserJSON = window.localStorage.getItem('loggedInUser')
+    if (loggedUserJSON) {
+      const user = JSON.parse(loggedUserJSON)
+      setUser(user)
+      farkleServcie.setToken(user.token)
+    }
+  }, [])
 
   return (
     <>
-      <div style={gameContainerStyle}>
-        <GameBoard>
-          <ScoreBoard />
-          <Divider />
-          <LayoutGroup>
-            <FarkleNotification status={status}/>
-            <WinNotification status={status}/>
-            <RollZone />
-            <Divider />
-            <DiceRack/>
-          </LayoutGroup>
-          <Divider />
-          <Controls />
-        </GameBoard>
-      </div >
+    <Routes>
+      <Route path='/' element={<HomePage/>} />
+      <Route path='/login' element={<LoginPage/>} />
+      <Route path='/farkle' element={<FarkleGamePage/>} />
+    </Routes>
     </>
   )
 }
