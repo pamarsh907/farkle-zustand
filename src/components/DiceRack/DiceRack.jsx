@@ -13,7 +13,8 @@ export default function DiceRack() {
     alignItems: 'center',
     gap: '5px',
     marginLeft: 'auto',
-    marginRight: 'auto'
+    marginRight: 'auto',
+    backgroundColor: 'white'
   }
 
   let diceToDisplay = []

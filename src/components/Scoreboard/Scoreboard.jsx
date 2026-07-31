@@ -10,7 +10,8 @@ export default function ScoreBoard() {
     display: 'flex',
     justifyContent: 'space-between',
     paddingLeft: '10px',
-    paddingRight: '10px'
+    paddingRight: '10px',
+    backgroundColor: 'white'
   }
 
   return (

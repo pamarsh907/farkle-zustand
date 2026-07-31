@@ -12,7 +12,8 @@ export default function Controls() {
     padding: '10px',
     display: 'flex',
     justifyContent: 'space-between',
-    height: '50px'
+    height: '50px',
+    backgroundColor: 'white'
   }
 
   return (
