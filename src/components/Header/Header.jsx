@@ -32,7 +32,7 @@ export default function Header() {
       route: '/farkle'
     },
   ]
-  
+
   const settings = [
     {
       id: 'profile',
@@ -45,13 +45,13 @@ export default function Header() {
       route: user ? '/' : '/login'
     }
   ]
-  
+
   const logout = () => {
     window.localStorage.removeItem('loggedInUser')
     setUser(null)
     handleCloseUserMenu()
   }
-  
+
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget)
   }
@@ -70,7 +70,7 @@ export default function Header() {
 
   return (
 
-    <AppBar position='static' sx={{backgroundColor: ''}}>
+    <AppBar position='static' sx={{ backgroundColor: '' }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Typography
@@ -85,9 +85,8 @@ export default function Header() {
               fontFamily: 'monospace',
               fontWeight: 700,
               letterSpacing: '.6rem',
-              color: 'aquamarine',
+              color: 'white',
               textDecoration: 'none',
-              textEmphasis: 'filled'
             }}
           >
             FARKLE
@@ -118,13 +117,20 @@ export default function Header() {
               open={Boolean(anchorElNav)}
               onClose={handleCloseNavMenu}
               sx={{ display: { xs: 'block', md: 'none' } }}
-            ></Menu>
+            >
+              {pages.map((page) => (
+                <MenuItem component={Link} to={page.route} key={page.id} onClick={handleCloseNavMenu}>
+                  <Typography sx={{ textAlign: 'center' }}>{page.text}</Typography>
+                </MenuItem>
+              ))}
+            </Menu>
           </Box>
 
           <Typography
             variant="h5"
             noWrap
-            component="a"
+            component={Link}
+            to='/'
             sx={{
               mr: 2,
               display: { xs: 'flex', md: 'none' },

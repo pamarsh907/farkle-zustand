@@ -3,12 +3,16 @@ import { useUser } from "../stores/user"
 export default function HomePage() {
   const user = useUser()
 
+  const style={
+    height: '400px',
+    backgroundColor: 'lightgray'
+  }
+
   return (
-    <div>
-      <h1>
-        Home Page!
+    <div style={style}>
+      <div>
         { user && <div>{user.username} is logged in!</div>}
-      </h1>
+      </div>
     </div>
   )
 }

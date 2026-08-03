@@ -8,12 +8,21 @@ import Divider from '@mui/material/Divider'
 import ScoreBoard from "../Scoreboard/Scoreboard"
 import { useStatus } from "../../stores/game"
 import WinNotification from "../WinNotification/WinNotification"
+import { useMediaQuery } from "@mui/material"
 
 function FarkleGame() {
   const gameContainerStyle = {
     width: '100%',
-    height: '100%',
-    backgroundColor: 'gray'
+    height: '80vh',
+    backgroundColor: 'lightgray',
+    paddingTop: '5px',
+    paddingBottom: '5px'
+  }
+
+  const gameBoardStyle = {
+    diplay: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-between'
   }
 
   const status = useStatus()
@@ -25,11 +34,13 @@ function FarkleGame() {
           <ScoreBoard />
           <Divider />
           <LayoutGroup>
-            <FarkleNotification status={status}/>
-            <WinNotification status={status}/>
-            <RollZone />
-            <Divider />
-            <DiceRack />
+            <FarkleNotification status={status} />
+            <WinNotification status={status} />
+            <div style={gameBoardStyle} className='gameboard'>
+              <RollZone />
+              <Divider />
+              <DiceRack />
+            </div>
           </LayoutGroup>
           <Divider />
           <Controls />

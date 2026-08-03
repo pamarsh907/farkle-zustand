@@ -4,15 +4,21 @@ import { useGameActions } from '../../stores/game'
 import { useDiceActions } from '../../stores/dice'
 import { useStatus } from '../../stores/game'
 import { useEffect } from 'react'
+import { useMediaQuery } from "@mui/material"
 
 export default function Die({ die }) {
+  const smallScreen = useMediaQuery('(max-width:600px)')
   const status = useStatus()
   const style = {
     backgroundColor: status === 'preroll' ? '#d8d3d3' : die.locked ? '#d8d3d3' : 'white',
     position: die.onBoard ? 'absolute' : 'relative',
     left: die.onBoard ? `${die.xLoc}px` : '0px',
-    top: die.onBoard ? `${die.yLoc}px` : '0px'
+    top: die.onBoard ? `${die.yLoc}px` : '0px',
+    width: smallScreen ? '28px' : '40px',
+    height: smallScreen ? '28px' : '40px'
+
   }
+  const dieDotClass = smallScreen ? 'smallldie__dot' : 'die__dot'
   const { holdDie } = useGameActions()
   const { incrementLastAnimatedRoll, setRotation } = useDiceActions()
 
@@ -34,7 +40,7 @@ export default function Die({ die }) {
       controls.start({
         rotate: spins * 360 + restingAngle,
         transition: {
-          duration: 0.3 + Math.random() * 0.5
+          duration: 0.2 + Math.random() * 0.8
         }
       }).then(() => {
         setRotation(die.id, restingAngle)
@@ -68,60 +74,60 @@ export default function Die({ die }) {
     >
       {die.value == 1 &&
         <div className='die__1'>
-          <div className='die__dot'></div>
+          <div className={dieDotClass}></div>
         </div>
       }
       {die.value == 2 &&
         <div className='die__2'>
-          <div className='die__dot'></div>
-          <div className='die__dot'></div>
+          <div className={dieDotClass}></div>
+          <div className={dieDotClass}></div>
         </div>
       }
       {die.value == 3 &&
         <div className='die__3'>
-          <div className='die__dot'></div>
-          <div className='die__dot'></div>
-          <div className='die__dot'></div>
+          <div className={dieDotClass}></div>
+          <div className={dieDotClass}></div>
+          <div className={dieDotClass}></div>
         </div>
       }
       {die.value == 4 &&
         <div className='die__4'>
           <div>
-            <div className='die__dot'></div>
-            <div className='die__dot'></div>
+            <div className={dieDotClass}></div>
+            <div className={dieDotClass}></div>
           </div>
           <div>
-            <div className='die__dot'></div>
-            <div className='die__dot'></div>
+            <div className={dieDotClass}></div>
+            <div className={dieDotClass}></div>
           </div>
         </div>
       }
       {die.value == 5 &&
         <div className='die__5'>
           <div>
-            <div className='die__dot'></div>
-            <div className='die__dot'></div>
+            <div className={dieDotClass}></div>
+            <div className={dieDotClass}></div>
           </div>
           <div>
-            <div className='die__dot'></div>
+            <div className={dieDotClass}></div>
           </div>
           <div>
-            <div className='die__dot'></div>
-            <div className='die__dot'></div>
+            <div className={dieDotClass}></div>
+            <div className={dieDotClass}></div>
           </div>
         </div>
       }
       {die.value == 6 &&
         <div className='die__6'>
           <div>
-            <div className='die__dot'></div>
-            <div className='die__dot'></div>
-            <div className='die__dot'></div>
+            <div className={dieDotClass}></div>
+            <div className={dieDotClass}></div>
+            <div className={dieDotClass}></div>
           </div>
           <div>
-            <div className='die__dot'></div>
-            <div className='die__dot'></div>
-            <div className='die__dot'></div>
+            <div className={dieDotClass}></div>
+            <div className={dieDotClass}></div>
+            <div className={dieDotClass}></div>
           </div>
         </div>
       }

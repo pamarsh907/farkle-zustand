@@ -1,8 +1,10 @@
 import Die from "../Die/Die"
 import { motion } from "motion/react"
 import { AnimatePresence } from "motion/react"
+import { useMediaQuery } from "@mui/material"
 
 export default function DiceGroup({ dice }) {
+  const smallScreen = useMediaQuery('(max-width:600px)')
   const grouping = dice[0].grouping
 
  const ring  = {
@@ -15,7 +17,7 @@ export default function DiceGroup({ dice }) {
 }
 
   return (
-    <div style={{position: 'relative', padding: '15px'}}>
+    <div style={{position: 'relative', padding: smallScreen ? '5px' : '15px'}}>
       <AnimatePresence>
         {grouping !== 0 && (
           <motion.div

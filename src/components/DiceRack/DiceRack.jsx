@@ -16,6 +16,7 @@ export default function DiceRack() {
     marginRight: 'auto',
     backgroundColor: 'white'
   }
+  
 
   let diceToDisplay = []
   for (let i = 0; i <= groupCount; i++) {
