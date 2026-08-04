@@ -7,7 +7,7 @@ import Button from '@mui/material/Button'
 import MuiStack from '@mui/material/Stack'
 import { useUserActions } from '../../stores/user'
 import loginService from '../../services/login'
-import farkleService from '../../services/farkle'
+import farkleService from '../../services/game'
 
 
 const LoginForm = () => {
@@ -22,7 +22,6 @@ const LoginForm = () => {
     event.preventDefault()
     try {
       const user = await loginService.login({ username, password })
-      console.log('user :', user)
 
       window.localStorage.setItem(
         'loggedInUser', JSON.stringify(user)

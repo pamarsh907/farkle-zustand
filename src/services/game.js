@@ -1,5 +1,5 @@
 import axios from 'axios'
-const baseUrl = '/api/farkle'
+const baseUrl = '/api/games'
 
 let token = null
 

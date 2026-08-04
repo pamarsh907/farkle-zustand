@@ -9,7 +9,6 @@ const getRandomNumber = (min, max) => {
   min = Math.ceil(min)
   max = Math.floor(max)
   const randomNum = Math.floor(Math.random() * (max - min + 1)) + min
-  console.log('randomNum :', randomNum)
   return randomNum
 }
 

@@ -1,6 +1,8 @@
 import { create } from 'zustand'
 import useDiceStore from './dice'
 import { evaluateDice, evaluateDiceSet } from '../utils/scoreUtils'
+import gameService from '../services/game'
+import useUserStore from './user'
 
 const useGameStore = create((set, get) => ({
   turns: [],
@@ -44,7 +46,7 @@ const useGameStore = create((set, get) => ({
       if (state.status === 'valid' || state.status === 'preroll') {
         //if all dice are held then reset all dice
         if (useDiceStore.getState().dice.filter(die => die.held).length === 6) {
-          console.log('HOT DICE!')
+          //console.log('HOT DICE!')
           useDiceStore.getState().actions.resetDice()
         }
 
@@ -166,10 +168,15 @@ const useGameStore = create((set, get) => ({
       useDiceStore.getState().actions.resetDice()
 
       //check for victory
-      if (get().totalPoints >= 10000) {
+      if (get().totalPoints >= 500) {
         set({
           status: 'win'
         })
+        //If logged in then save game to db
+        const user = useUserStore.getState().user
+        if(user){
+          gameService.create(get().turns)
+        }
       } else {
         set({
           status: 'preroll'

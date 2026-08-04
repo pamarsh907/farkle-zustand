@@ -11,3 +11,5 @@ const useUserStore = create((set) => ({
 
 export const useUser = () => useUserStore((state) => state.user)
 export const useUserActions = () => useUserStore((state) => state.actions)
+
+export default useUserStore

@@ -4,7 +4,7 @@ import LoginPage from "./pages/LoginPage"
 import FarkleGamePage from "./pages/FarkleGamePage"
 import { useEffect } from 'react'
 import { useUserActions } from "./stores/user"
-import farkleServcie from "./services/farkle"
+import farkleServcie from "./services/game"
 import Layout from "./components/Layout/Layout"
 import { BrowserRouter as Router } from 'react-router-dom'
 import HowToPage from "./pages/HowToPage"
