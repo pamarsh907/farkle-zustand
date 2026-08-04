@@ -27,10 +27,8 @@ const LoginForm = () => {
       window.localStorage.setItem(
         'loggedInUser', JSON.stringify(user)
       )
-      //TODO: change this to user service?
       farkleService.setToken(user.token)
 
-      //TODO: create user store
       setUser(user)
       //setNotification(`${username} logged in`)
       //setTimeout(() => {
@@ -49,9 +47,9 @@ const LoginForm = () => {
   }
 
   return (
-    <Card variant="outlined" sx={{ maxWidth: 360, padding: 2 }}>
+    <Card variant="outlined" sx={{ width: '100%', maxWidth: 360, padding: 2 }}>
       <Box>
-        <h2>Login Form</h2>
+        <h2>Login</h2>
         <form onSubmit={login}>
           <MuiStack spacing={2} direction="column">
             <TextField

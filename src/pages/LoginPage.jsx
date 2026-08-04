@@ -1,12 +1,13 @@
 import LoginForm from "../components/LoginForm/LoginForm"
+import { Container, Paper } from "@mui/material"
 
 export default function LoginPage() {
   return (
-    <div>
-      <h1>
-        Login Page
-      </h1>
-      <LoginForm />
-    </div>
+    <Container maxWidth="md" sx={{ py: 6 }}>
+      <Paper elevation={3} sx={{ p: { xs: 3, md: 5 }, borderRadius: 3, ml: 'auto', mr: 'auto', display: 'flex', justifyContent: 'center'}}>
+        <LoginForm />
+      </Paper>
+    </Container>
+
   )
 }

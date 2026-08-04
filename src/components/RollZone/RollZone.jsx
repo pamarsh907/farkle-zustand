@@ -4,7 +4,8 @@ import Die from "../Die/Die"
 export default function RollZone() {
   const style = {
     position: 'relative',
-    height: '45dvh'
+    flexGrow: 1,
+    minHeight: 0
   }
 
   const dice = useDice().filter(die => die.onBoard === true)

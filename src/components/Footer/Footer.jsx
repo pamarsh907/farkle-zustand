@@ -1,19 +1,16 @@
-import { Container } from "@mui/material"
 import { useMediaQuery } from "@mui/material"
 
 export default function Footer() {
-//const smallScreen = useMediaQuery('(max-width:600px)')
+  const smallScreen = useMediaQuery('(max-width:600px)')
 
   const style = {
     height: '30px',
-    backgroundColor: '#1976d2',
-    //borderWidth: '1px',
+    backgroundColor: '#111827',
     alignItems: 'center',
     justifyContent: 'space-around',
-    //opacity: '5',
     fontSize: '8px',
     color: 'white',
-    display: 'flex',
+    display: smallScreen ? 'none' : 'flex',
     flexDirection: 'column'
   }
 

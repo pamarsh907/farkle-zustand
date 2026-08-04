@@ -34,7 +34,7 @@ export default function Header() {
   ]
 
   const settings = [
-    {
+    user && {
       id: 'profile',
       text: 'Profile',
       route: '/profile'
@@ -44,7 +44,7 @@ export default function Header() {
       text: user ? 'Logout' : 'Login',
       route: user ? '/' : '/login'
     }
-  ]
+  ].filter(Boolean)
 
   const logout = () => {
     window.localStorage.removeItem('loggedInUser')
@@ -67,10 +67,9 @@ export default function Header() {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null)
   }
-
   return (
 
-    <AppBar position='static' sx={{ backgroundColor: '' }}>
+    <AppBar position='static' sx={{ backgroundColor: '#111827', border: '' }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Typography

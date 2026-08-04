@@ -8,17 +8,31 @@ export default function GameBoard(props) {
   const style = {
     border: 'solid 3px',
     borderColor: 'darkgray',
-    //height: '90dvh'
-  }
-
-  const gameboardStyle = {
-    paddingLeft: smallScreen ? '0px' : '16px',
-    paddingRight: smallScreen ? '0px' : '16px'
   }
 
   return (
-    <Container className='gameboard' maxWidth='sm' style={gameboardStyle}>
-      <Card style={style}>
+    <Container
+      className='gameboard'
+      maxWidth='md'
+      sx={{
+        px: smallScreen ? 0 : 2,
+        flexGrow: 1,
+        display: "flex",
+        flexDirection: "column",
+        minHeight: 0,
+      }}
+    >
+      <Card
+        style={style}
+        sx={{
+          border: "solid 3px",
+          borderColor: "darkgray",
+          flexGrow: 1,
+          display: "flex",
+          flexDirection: "column",
+          minHeight: 0
+        }}
+      >
         {props.children}
       </Card>
     </Container>

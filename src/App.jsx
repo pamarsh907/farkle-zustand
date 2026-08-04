@@ -7,6 +7,8 @@ import { useUserActions } from "./stores/user"
 import farkleServcie from "./services/farkle"
 import Layout from "./components/Layout/Layout"
 import { BrowserRouter as Router } from 'react-router-dom'
+import HowToPage from "./pages/HowToPage"
+import HallOfFamePage from "./pages/HallOfFamePage"
 
 function App() {
   const { setUser } = useUserActions()
@@ -27,6 +29,8 @@ function App() {
           <Route index element={<HomePage />} />
           <Route path='login' element={<LoginPage />} />
           <Route path='farkle' element={<FarkleGamePage />} />
+          <Route path='how-to' element={<HowToPage/>} />
+          <Route path='hall-of-fame' element={<HallOfFamePage/>} />
         </Route>
       </Routes>
     </Router>

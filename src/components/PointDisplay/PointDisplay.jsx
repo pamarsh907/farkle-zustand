@@ -14,5 +14,12 @@ export default function PointDisplay({ value }) {
 
   spring.set(value)
 
-  return <motion.span>{display}</motion.span>
+  return (
+    <motion.span>
+      {display}
+    </motion.span>
+  )
+
 }
+
+

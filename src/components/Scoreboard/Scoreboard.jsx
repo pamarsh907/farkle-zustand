@@ -11,16 +11,18 @@ export default function ScoreBoard() {
   const style = {
     display: 'flex',
     justifyContent: 'space-between',
-    padding: '10px',
-    backgroundColor: 'white',
+    padding: '15px',
     flexDirection: smallScreen ? 'column' : 'row',
-    alignItems: 'center'
+    alignItems: 'center',
+    fontFamily: "monospace",
+    fontWeight: 700,
+    letterSpacing: ".4rem"
   }
 
   return (
     <div style={style}>
-        <div>{`This turn: `}<PointDisplay value={currentTurnPoints} /></div>
-        <div>{`Total: `}<PointDisplay value={totalPoints} /></div>
+      <div >{`This turn: `}<PointDisplay value={currentTurnPoints} /></div>
+      <div>{`Total: `}<PointDisplay value={totalPoints} /></div>
     </div>
   )
 }
