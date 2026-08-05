@@ -179,7 +179,7 @@ export default function Header() {
               onClose={handleCloseUserMenu}
             >
               {settings.map((setting) => (
-                <MenuItem component={Link} to={setting.route} key={setting.id} onClick={user ? logout : handleCloseUserMenu}>
+                <MenuItem component={Link} to={setting.route} key={setting.id} onClick={user && setting.id === 'loginout' ? logout : handleCloseUserMenu}>
                   <Typography sx={{ textAlign: 'center' }}>{setting.text}</Typography>
                 </MenuItem>
               ))}

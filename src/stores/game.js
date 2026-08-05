@@ -168,7 +168,7 @@ const useGameStore = create((set, get) => ({
       useDiceStore.getState().actions.resetDice()
 
       //check for victory
-      if (get().totalPoints >= 500) {
+      if (get().totalPoints >= 10000) {
         set({
           status: 'win'
         })

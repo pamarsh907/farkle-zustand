@@ -12,6 +12,11 @@ const getAll = () => {
   return request.then(response => response.data)
 }
 
+const getUserGames = async (userId) => {
+  const response = await axios.get(`/api/users/${userId}/games`)
+  return response.data
+}
+
 const create = async newObject => {
   const config = {
     headers: { Authorization: token }
@@ -37,4 +42,4 @@ const remove = (id) => {
   return request.then(response => response.data)
 }
 
-export default { getAll, create, update, setToken, remove }
+export default { getAll, create, update, setToken, remove, getUserGames }
