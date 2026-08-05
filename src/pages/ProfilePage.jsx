@@ -14,7 +14,6 @@ export default function ProfilePage() {
       const fetchUserGames = async () => {
         const userGames = await fetchGames(user.id)
         setGames(userGames)
-        console.log('userGames :', userGames)
       }
       fetchUserGames()
     }

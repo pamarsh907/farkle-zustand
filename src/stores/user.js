@@ -1,8 +1,6 @@
 import { create } from 'zustand'
 import gameService from '../services/game'
 
-console.log("CREATING USER STORE")
-
 const useUserStore = create((set, get) => ({
   user: null,
   actions: {
@@ -21,7 +19,6 @@ const useUserStore = create((set, get) => ({
     },
     fetchAllGames: async () => {
       const response = await gameService.getAll()
-      console.log('response :', response)
       return response
     },
   }
