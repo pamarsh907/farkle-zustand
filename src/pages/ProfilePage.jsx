@@ -19,7 +19,7 @@ export default function ProfilePage() {
       fetchUserGames()
     }
 
-  }, [setGames, fetchGames])
+  }, [setGames, fetchGames, user])
 
   return (
     <Container maxWidth="md" sx={{ py: 6 }}>

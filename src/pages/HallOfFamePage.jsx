@@ -1,4 +1,3 @@
-import { useUser } from "../stores/user"
 import { Container, Paper } from "@mui/material"
 import { useState, useEffect } from "react"
 import { useUserActions } from "../stores/user"

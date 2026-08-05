@@ -6,6 +6,7 @@ import MenuIcon from '@mui/icons-material/Menu'
 import { useUser } from "../../stores/user"
 import { useNavigate } from 'react-router-dom'
 import { useUserActions } from "../../stores/user"
+import { useGameActions } from "../../stores/game"
 
 export default function Header() {
   const [anchorElNav, setAnchorElNav] = useState(null)
@@ -14,6 +15,7 @@ export default function Header() {
   const navigate = useNavigate()
   const user = useUser()
   const { setUser } = useUserActions()
+  const { resetGame } = useGameActions()
 
   const pages = [
     {
@@ -49,6 +51,8 @@ export default function Header() {
   const logout = () => {
     window.localStorage.removeItem('loggedInUser')
     setUser(null)
+    resetGame()
+
     handleCloseUserMenu()
   }
 
